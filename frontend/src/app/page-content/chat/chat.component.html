@@ -1,0 +1,104 @@
+<div class="chat-container">
+    <h3 class="text-center">Messaging</h3>
+    <div class="messaging p-1">
+        <div class="inbox_msg row">
+            <div class="inbox_people col-md-4">
+                <div class="headind_srch">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Recent</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group position-relative">
+                                <input  #search type="text" class="form-control round" (keyup)="searchChannel(search.value)">
+                                <div class="form-control-position">
+                                    <i class="feather icon-search primary"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="inbox_chat">
+                    <!-- <h6 class="px-2 pb-25 mb-0">CHANNELS<i class="feather icon-plus float-right cursor-pointer" (click)="onCreateChannel()"></i> -->
+                    <div style="display: flex;justify-content: space-between;">
+                        <h6 class="">CHANNELS</h6>
+
+                        <i class="feather icon-plus float-right cursor-pointer"
+                            (click)="onCreateUserChannel()"></i>
+
+                    </div>
+                    <div class=" mt-1" *ngFor="let item of channels">
+                        <div style="display: flex;justify-content: space-between;height: 40px; padding: 10px;"
+                            class="px-2" [ngClass]="{'active': selectedChannel?.channelId === item.id}">
+                            <a class="" (click)="onSelectedChannel(item)"># {{item.title}}</a>
+                            <i class="fa fa-trash" (click)="onDeleteChannel(item)" *ngIf="item?.userAdmin === currentUser.id"></i>
+                            <i class="fa fa-sign-out" (click)="onLeaveGroupChat(item)" *ngIf="item?.userJoined && item?.userJoined.includes(currentUser.id) && item?.userAdmin !== currentUser.id"></i>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mesgs col-md-8">
+                <div class="msg_history" id="msg_history">
+                    <div class="incoming_msg" id="incoming_msg">
+                        <div *ngFor="let item of selectedChannel?.messages">
+                            <div *ngIf="item.senderId !== currentUser.id">
+                                <span style="padding-left: 3.5vw">{{item.senderName}}</span>
+                                <br>
+                                <div class="incoming_msg_img"> <img
+                                        src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                <div class="received_msg">
+                                    <div class="received_withd_msg">
+                                        <p>{{item.message}}</p>
+                                       
+                                        <span class="time_date"> {{item.date}} {{item.time}}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="outgoing_msg" *ngIf="item.senderId === currentUser.id">
+                                <div class="sent_msg">
+                                    <p>{{item.message}}</p>
+                                    <span class="time_date"> {{item.date}} {{item.time}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="type_msg">
+                    <div class="input_msg_write">
+                        <input type="text" class="write_msg" [(ngModel)]="message" placeholder="Type a message" (keyup.enter)="onSendMessage()"
+                            style="outline: none;" />
+                        <button class="msg_send_btn" type="button" (click)="onSendMessage()"><i
+                                class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<app-modal-popup-custom [modalObject]="createChatModal">
+    <form>
+        <div class="form-group row">
+            <div class="col-md-3 form-col-label">
+                Channel title
+            </div>
+            <div class="col-md-9">
+                <input type="text" class="form-control" [(ngModel)]="channelTitle" name="channelTitle">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-3 form-col-label">
+                Select users
+            </div>
+            <div class="col-md-9">
+                <ng-select [items]="listUser" bindLabel="email" [clearable]="false" [(ngModel)]="selectedUsers" name="selectedUsers"
+                    name="selectedTutor" (change)="onSelectUsers($event)" [multiple]="true"></ng-select>
+            </div>
+        </div>
+    </form>
+</app-modal-popup-custom>

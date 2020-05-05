@@ -1,0 +1,54 @@
+
+//@media (min-width: 576px){
+//  .modal-custom {
+//    max-width: 900px !important;
+//    margin: 5rem auto !important;
+//  }
+//}
+.modal-custom{
+   padding:2.5rem;
+    &-header{
+        padding:0px;
+        padding-bottom:1rem;
+        text-align:center;
+        display:block;
+        border-bottom:none;
+        &-icon{
+            line-height:1.2;
+            .icon{
+                font-size: 3.5rem;
+                
+            }
+            &-success{
+                color: #2FA84F;
+            }
+            &-warning{
+                color: #F3AA18;
+            }
+        }
+        &-title {
+            color: #3E4345;
+            font-size:2rem;
+            font-weight:bold;
+        }
+    }
+    &-body{
+        padding:0px;
+        padding-bottom:3rem;
+        &-message{
+            color:#5E6366;
+            font-size:1rem;
+            font-weight:normal;
+        }
+    }
+    &-footer{
+        
+        border-top:none;
+    }
+	&.no-pd{
+		padding: 0 !important;
+		.modal-custom-body, .modal-custom-header{
+			padding: 0 !important;
+		}
+	}
+}

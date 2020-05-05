@@ -1,0 +1,5 @@
+<label class="toggle-switch {{disabled?'disabled':''}} ">
+  <input type="checkbox" [attr.name]="name || 'checkbox'" (change)="onChange($event)" checked="{{model?'checked':null}}"
+    [disabled]="disabled">
+  <span [class.active]='model' class="slider round"></span>
+</label>

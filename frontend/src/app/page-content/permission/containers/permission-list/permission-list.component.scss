@@ -1,0 +1,36 @@
+
+.fixed-width {
+    width: 100px!important;
+}
+
+.tag-blue {
+    color: #2776ec;
+    background: #ecf1f5;
+    border-color: #528ce4;
+}
+.tag-red {
+    color: #f45b19;
+    background: #f8e4db;
+    border-color: #fa976c;
+}
+.tag-green {
+    color: #2bac4d;
+    background: #d6f5df;
+    border-color: #6db881;
+}
+.tag {
+    font-weight: 400;
+    border-radius: 4px;
+    padding: 4px 10px;
+    border: 1px solid;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 20px;
+    -webkit-box-align: center;
+    align-items: center;
+    text-align: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    display: -webkit-inline-box;
+    display: inline-flex;
+}

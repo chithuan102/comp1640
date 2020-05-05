@@ -1,0 +1,173 @@
+$primary-lighter: #E1ECFE;
+$primary-light: #5995F0;
+$primary: #2F7BED;
+$primary-dark: #2662BD;
+
+$secondary-lightest: #F8EBEB;
+$secondary-lighter: #EAC3C2;
+$secondary-light: #F3A8A6;
+$secondary: #BA3633;
+$secondary-dark: #83000D;
+
+/* Accent Color */
+$success-lighter: #DCF7E3;
+$success-light: #7AC78F;
+$success: #2FA84F;
+$success-dark: #26863F;
+
+$warning-lighter: #FCF3D7;
+$warning-light: #F8CA6D;
+$warning: #F4AC1C;
+$warning-dark: #C38A16;
+
+$error-lighter: #FCEAE2;
+$error-light: #F8966C;
+$error: #F45B19;
+$error-dark: #C34914;
+
+$additional-lighter: #E1D8F1;
+$additional-light: #7F59C2;
+$additional: #673AB7;
+$additional-dark: #59329F;
+
+/* Neutral Color */
+$ink-lightest: #919EAB;
+$ink-lighter: #637381;
+$ink-light: #454F5B;
+$ink: #212B36;
+
+$sky-lightest: #F9FAFB;
+$sky-lighter: #F4F6F8;
+$sky-light: #DFE3E8;
+$sky: #C4CDD5;
+
+$basic: #FFFFFF;
+
+$text-dark: #3E4345;
+$text-light: #FFFFFF;
+
+$background-10: #F7F9FA;
+$background-20: #F1F3F4;
+$background-30: #E3E5E5;
+$background-40: #C6CACC;
+$background-60: #919699;
+$background-80: #5E6366;
+$background-90: #3E4345;
+
+$primary-lighten: #F9DCDC;
+$primary-normal: #BA3633;
+$primary-darken: #5C0009; 
+
+$second-lighten: #D6F5FF;
+$second-light: #11C6FF;
+$second-normal: #00B1E9;
+$second-dark: #0093C2;
+$second-darken: #0079A0;
+
+$icon-normal: #78909C;
+$icon-active: #5B727F;
+
+$info: #2F7BED;
+$info-normal: #5995F0;
+$info-light: #E1ECFE;
+$green-lighter: #DCF7E3;
+$green-color: #2FA84F;
+
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 22px;
+  margin: 4px;
+
+}
+
+.toggle-switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $ink-lighter;
+  -webkit-transition: .4s;
+  transition: .4s;
+  cursor: pointer;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  background-color: $sky-lightest;
+  -webkit-transition: .4s;
+  transition: .4s;
+  box-shadow: 0px 1px 2px rgba(8, 35, 48, 0.24), 0px 2px 6px rgba(8, 35, 48, 0.16);
+}
+
+input:checked+.slider {
+  background-color: $primary;
+}
+
+input:focus+.slider {
+  box-shadow: 0 0 1px $second-light;
+}
+
+input:checked+.slider:before {
+  -webkit-transform: translateX(19px);
+  -ms-transform: translateX(19px);
+  transform: translateX(19px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.slider.active {
+  background-color: $basic;
+  border-radius: 34px;
+}
+
+.slider.active:before {
+  background-color: $basic;
+  border-radius: 50%;
+}
+
+.toggle-switch.disabled {
+  .slider {
+    background-color: $sky;
+    border: 2px solid $sky;
+    border-radius: 34px;
+    cursor: default;
+  }
+
+  .slider:before {
+    background-color: $basic;
+    border-radius: 50%;
+    left: 1px;
+    bottom: 1px;
+    cursor: default;
+  }
+
+  .slider.active {
+    background-color: $sky;
+    border: 2px solid $sky;
+  }
+
+  .slider.active:before {
+    background-color: $basic;    
+  }
+
+}

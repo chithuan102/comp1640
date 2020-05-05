@@ -1,0 +1,49 @@
+<div class="form-create-blog">
+    <div class="row mb-3">
+        <div class="col-md-4">
+            <h2>{{isEdit? 'Edit': 'Create'}} blog</h2>
+        </div>
+        <div class="col-md-8 text-right">
+            <button class="btn btn-success mr-2" (click)="onSubmit()">
+                <i class="fa fa-check"></i>
+            </button>
+
+            <button class="btn btn-warning " (click)="onBack()">
+                <i class="fa fa-sign-out"></i>
+            </button>
+
+        </div>
+    </div>
+    <form [formGroup]="form">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputEmail4">Title</label>
+                <input type="email" class="form-control" id="inputEmail4" placeholder="Input title"
+                    formControlName="title">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputEmail4">Short content</label>
+                <textarea name="" id="" cols="30" rows="5" class="form-control" placeholder="Input short content"
+                    formControlName="shortDescription"></textarea>
+            </div>
+        </div>
+        <!-- <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="inputAddress">Thumbnail</label>
+            </div>
+            <div class="col-md-6">
+                <input type="file" name="thumbnail" id="field_thumbnail" />
+            </div>
+        </div> -->
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="inputAddress2">Content</label>
+                <ck-editor name="editor1" formControlName="content" skin="moono-lisa" language="en" [fullPage]="true">
+                </ck-editor>
+            </div>
+        </div>
+    </form>
+</div>

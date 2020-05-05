@@ -1,0 +1,37 @@
+/* You can add global styles to this file, and also import other style files */
+@import "./assets/css/toast.css";
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+@import '~@fullcalendar/core/main.css';
+@import '~@fullcalendar/daygrid/main.css';
+
+@import '../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css';
+.modal-custom-xl {
+  min-width: 70vw;
+}
+
+.modal-custom-lg {
+  min-width: 60vw;
+}
+
+.modal-custom-md {
+  min-width: 50vw;
+}
+
+.modal-custom-sm {
+  min-width: 30vw;
+}
+.btn-outline {
+  border: 1px solid #2f7bed;
+}
+.btn {
+  min-width: 50px;
+}
+
+.ng-select.ng-select-disabled > .ng-select-container {
+  background-color: #ECEFF1;
+}
+
+.form-check-inline{
+  padding-top: 10px;
+}

@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-md-8">
+
+        <div style="display: flex; justify-content: space-between;">
+            <h1>
+                Blog home
+            </h1>
+            <button type="button" class="btn btn-primary" (click)="onCreate()">
+                <i class="fa fa-plus"></i>
+                New blog</button>
+        </div>
+        <!-- Blog Post -->
+        <div class="card mb-4 mt-3" *ngFor="let item of listBlogs | paginate:config">
+            <!-- <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap" *ngIf="!item.thumbnail">
+            <img class="card-img-top" src="{{staticPath}}{{item.thumbnail}}" alt="Card image cap"
+                *ngIf="item.thumbnail"> -->
+            <div class="card-body">
+                <h2 class="card-title">{{item.title}}</h2>
+                <p class="card-text">{{item.shortDescription}}</p>
+                <!-- <a href="#" class="btn btn-primary">Read More →</a> -->
+                <a [routerLink]="['/blog/blog-detail/',item.id]" class="btn btn-primary">Read More</a>
+            </div>
+            <div class="card-footer text-muted">
+                Posted on {{item.createdAt | date: 'dd/MM/yyyy HH:mm'}} by
+                <a>{{item.user.fullName}}</a>
+            </div>
+        </div>
+
+
+        <!-- Pagination -->
+        <div class="row">
+            <div class="col-12 text-center">
+                <pagination-controls [id]="config.id" [maxSize]="maxSize" [directionLinks]="directionLinks"
+                    [autoHide]="autoHide" [responsive]="responsive" [previousLabel]="labels.previousLabel"
+                    [nextLabel]="labels.nextLabel" [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
+                    [screenReaderPageLabel]="labels.screenReaderPageLabel"
+                    [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel" (pageChange)="onPageChange($event)">
+                </pagination-controls>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <app-blog-sidebar (blogSearch)="getBlogSearch($event)"></app-blog-sidebar>
+    </div>
+</div>

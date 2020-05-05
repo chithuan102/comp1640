@@ -1,0 +1,11 @@
+@import "./color_styles_v2";
+
+$separator-line-color: rgba(0, 0, 0, 0.1);
+
+.pms-app {
+  .hms-button{
+    &-default{
+      background: $color-gradient-warning-2_1;
+    }
+  }
+}

@@ -1,0 +1,33 @@
+<ng-template #templateModal>
+
+  <div class="modal-custom" id="{{ modalObject.id || ''}}">
+    <div class="modal-header modal-custom-header {{modalObject.headerClass}}" *ngIf="modalObject.title">
+      <h4 class="modal-title modal-custom-header-title">
+        {{modalObject.title}}
+      </h4>
+    </div>
+    <div class="modal-body modal-custom-body">
+      <ng-content></ng-content>
+    </div>
+    <div class="modal-footer modal-custom-footer" >
+      <div class="text-center w-100">
+        <button *ngIf="modalObject.confirm && !modalObject.hideFooter" id="btnConfirm" type="button" class="btn btn-primary mr-1"
+          (click)="modalObject.confirm()" >
+          {{modalObject.textConfirm || 'Submit'}}
+        </button>
+        <button *ngFor="let btn of modalObject.buttons" [id]="btn.id" class="{{btn.class}} mr-10" (click)="btn.action()">
+          {{btn.title}}
+        </button>
+        <button *ngIf="modalObject.cancel" id="btnCancel" type="button" class="btn btn-outline"
+          (click)="modalObject.cancel(bsModalRef, null)">
+          {{modalObject.textCancel || 'Cancel'}}
+        </button>
+
+      </div>
+    </div>
+  </div>
+</ng-template>
+<!-- Modal -->
+
+<button *ngIf="modalObject.showBtnDemo" class="btn btn-primary btn-sm mb-20" (click)="modalObject.show()">Click
+  show modal popup</button>

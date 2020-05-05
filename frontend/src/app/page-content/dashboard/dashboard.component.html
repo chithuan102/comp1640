@@ -1,0 +1,104 @@
+<h1>{{currentUser.role}} dashboard</h1>
+
+
+<div class="row mb-2" *ngIf="currentUser?.role === 'ADMIN' ||currentUser?.role === 'STAFF' " >
+  <div class="col-12">
+    <ng-select [items]="listUsers$ | async" [loading]="isFetchingTutor" [typeahead]="userInput$"
+      placeholder="Type some thing here" style="max-width: 450px;" bindLabel="email" [clearable]="false"
+      [(ngModel)]="selectedUser" name="selectedTutor" (change)="onSelectUser($event)"></ng-select>
+  </div>
+</div>
+
+<div style="display: flex;justify-content: space-between" class="mb-3">
+</div>
+<div class="chart-wrapper row">
+
+  <div class="col-md-6">
+    <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+      [options]="pieChartOptions" [plugins]="pieChartPlugins" [colors]="pieChartColors" [legend]="pieChartLegend"
+      *ngIf="pieChartData.length > 0">
+    </canvas>
+
+  </div>
+  <div class="col-md-6">
+    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+      [chartType]="barChartType" [legend]="barChartLegend" [chartType]="barChartType" [colors]="barChartColors"
+      *ngIf="barChartData.length > 0"></canvas>
+  </div>
+</div>
+<div class="row mt-3" *ngIf="currentUser?.role === 'ADMIN' ||currentUser?.role === 'STAFF' ">
+  <div class="col-12">
+    <h1>Students not have tutor</h1>
+    <div class="table-responsive">
+      <table class="table table-striped table-no-bordered table-hover ">
+        <thead>
+          <tr>
+            
+            <th>Full Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of studentNoTutorList | paginate:studentNoTutorConfig">
+            <td>{{item.fullName}}</td>
+            <td>{{item.phoneNumber}}</td>
+            <td>{{item.email}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="row">
+      <div class="col-12 text-right">
+        <pagination-controls [id]="studentNoTutorConfig.id" [maxSize]="maxSize" [directionLinks]="directionLinks"
+          [autoHide]="autoHide" [responsive]="responsive" [previousLabel]="labels.previousLabel"
+          [nextLabel]="labels.nextLabel" [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
+          [screenReaderPageLabel]="labels.screenReaderPageLabel"
+          [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel"
+          (pageChange)="onPageStudentNoTutorChange($event)">
+        </pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row mt-3" *ngIf="currentUser?.role === 'ADMIN' ||currentUser?.role === 'STAFF'">
+  <div class="col-12">
+    <div style="display: flex;justify-content: space-between" class="mb-3">
+
+      <h1>Students not interaction in {{currentOptionUnactive === '28_DAYS' ? '28' : '7' }} days</h1>
+      <ng-select style="width: 150px;" [items]="studentNotActiveOptions" bindLabel="label" bindValue="value"
+        (change)="onChangeShowStudenUnactive($event)" [(ngModel)]="currentOptionUnactive" [clearable]="false"></ng-select>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-striped table-no-bordered table-hover ">
+        <thead>
+          <tr>
+
+            <th>Full Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of studentUnActive | paginate:studentUnactiveConfig">
+            <td>{{item.fullName}}</td>
+            <td>{{item.phoneNumber}}</td>
+            <td>{{item.email}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="row">
+      <div class="col-12 text-right">
+        <pagination-controls [id]="studentUnactiveConfig.id" [maxSize]="maxSize" [directionLinks]="directionLinks"
+          [autoHide]="autoHide" [responsive]="responsive" [previousLabel]="labels.previousLabel"
+          [nextLabel]="labels.nextLabel" [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
+          [screenReaderPageLabel]="labels.screenReaderPageLabel"
+          [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel" (pageChange)="onPageChange($event)">
+        </pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>

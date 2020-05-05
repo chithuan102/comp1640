@@ -1,0 +1,177 @@
+<!-- 
+<div class="row">
+
+</div>
+<div class="row mb-3">
+        <div class="col-md-12">
+                <h1>Your calendar</h1>
+                <full-calendar schedulerLicenseKey="GPL-My-Project-Is-Open-Source" defaultView="dayGridMonth"
+                        [plugins]="calendarPlugins" [events]="calendarEvents" (eventClick)="eventClick($event)"
+                        (dateClick)="handleDateClick($event)">
+                </full-calendar>
+        </div>
+        <div class="col-md-6">
+                <h1>Your Tutor calendar</h1>
+        </div>
+</div>
+ -->
+
+<h1>Meeting List</h1>
+<div class="row  my-1">
+    <div class="col-6">
+        <ng-select [items]="showOptions" bindValue="value" bindLabel="label" [clearable]="false"
+            [(ngModel)]="currentShowOption" name="currentShowOption" (change)="onChangeShowOption($event)"
+            style="max-width: 200px !important;">
+        </ng-select>
+
+
+    </div>
+    <div class="col-6 text-right">
+        <button class="btn btn-info " (click)="onCreate()">
+            <i class="fa fa-user-plus"></i>
+        </button>
+    </div>
+</div>
+<div class="table-responsive" *ngIf="currentShowOption === 'SHOW_AS_TABLE'">
+    <table class="table table-striped table-no-bordered table-hover">
+        <thead>
+            <tr>                
+                <th>Creater</th>
+                <th>Inviter</th>
+                <th>Place</th>
+                <th>Type</th>
+                <th>Topic</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of listMeeting">
+                <td>{{item.creater.email}}</td>
+                <td>{{item.inviter.email}}</td>
+                <td>{{item.place}}</td>
+                <td>{{item.type}}</td>
+                <td>{{item.topic}}</td>
+
+                <td class="text-right">
+                    <button class="btn btn-warning mr-1" (click)="onView(item)" >
+                        <i class="fa fa-eye"></i>
+                    </button>
+                    <button class="btn btn-danger" (click)="onDelete(item)" *ngIf="currentUser.email === item.creater.email">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </td>
+                <!-- <tr *ngFor="let item of sources | paginate:config">
+                <td>{{item.id}}</td>
+                <td>{{item.fullName}}</td>
+                <td>{{item.lastName}}</td>
+                <td>{{item.phoneNumber}}</td>
+                <td>{{item.email}}</td>
+                <td class="text-right">
+                    <button class="btn btn-warning mr-1" (click)="onView(item)">
+                        <i class="fa fa-eye"></i>
+                    </button>
+                    <button class="btn btn-danger" (click)="onDelete(item)" *hasRoles="['ADMIN']">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </td> -->
+            </tr>
+        </tbody>
+    </table>
+    <!-- <div class="row">
+        <div class="col-12 text-right">
+            <pagination-controls [id]="config.id" [maxSize]="maxSize" [directionLinks]="directionLinks"
+                [autoHide]="autoHide" [responsive]="responsive" [previousLabel]="labels.previousLabel"
+                [nextLabel]="labels.nextLabel" [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
+                [screenReaderPageLabel]="labels.screenReaderPageLabel"
+                [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel" (pageChange)="onPageChange($event)">
+            </pagination-controls>
+        </div>
+    </div> -->
+</div>
+<div *ngIf="currentShowOption === 'SHOW_AS_CALENDAR'">
+    <full-calendar schedulerLicenseKey="GPL-My-Project-Is-Open-Source" defaultView="dayGridMonth"
+        [plugins]="calendarPlugins" [events]="calendarEvents" (eventClick)="eventClick($event)"
+        (dateClick)="handleDateClick($event)">
+    </full-calendar>
+</div>
+
+<app-modal-popup-custom [modalObject]="modalObject">
+    <h3 class="mb-3">{{objectDetail?.id ? 'Update' : 'Create'}} meeting</h3>
+    <form class="form-staff" [formGroup]="form">
+        <div class="row">
+            <div class="col-12">
+                <!-- <div class="form-group row" *ngIf="currentUser?.role === 'STUDENT'">
+                    <label class="col-md-3 col-form-label required">Tutor</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" [value]="currentUser?.tutor?.email" readonly>
+                    </div>
+                </div> -->
+                <div class="form-group row" *ngIf="objectDetail.id ">
+                    <label class="col-md-3 col-form-label required">Id</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" placeholder="Input topic here" formControlName="id">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label required">Inviter</label>
+                    <div class="col-md-9">
+                        <ng-select [items]="listUsers$ | async" 
+                        [loading]="isFetchingUser" 
+                        [typeahead]="userInput$"
+                        bindLabel="email" 
+                        [clearable]="false" 
+                        placeholder="Type user email"
+                        formControlName="inviter"></ng-select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label required">Topic</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" placeholder="Input topic here" formControlName="topic">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label required">Date</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" placeholder="Input time here" bsDatepicker
+                            [bsConfig]="bsConfig" formControlName="time">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label required">Time</label>
+                    <div class="col-md-3 col-6">
+                        <span>Start</span>
+                        <ngb-timepicker formControlName="start"></ngb-timepicker>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <span>End</span>
+                        <ngb-timepicker formControlName="end"></ngb-timepicker>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label required">Type</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" placeholder="Input type here" formControlName="type">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label required">Place</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" placeholder="Input place here" formControlName="place">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 col-form-label required">Notes</label>
+                    <div class="col-md-9">
+                        <!-- <input type="text" class="form-control"> -->
+                        <textarea class="form-control" name="" id="" cols="30" rows="5" placeholder="Inout notes here"
+                            formControlName="notes"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</app-modal-popup-custom>
+
+<ngx-material-timepicker #timeStart></ngx-material-timepicker>
+<ngx-material-timepicker #timeEnd></ngx-material-timepicker>

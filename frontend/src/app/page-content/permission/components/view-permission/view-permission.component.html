@@ -1,0 +1,45 @@
+<div class="row mb-3">
+    <div class="col-md-4">
+        <h2>Role information</h2>
+    </div>
+    <div class="col-md-8 text-right">
+        <button class="btn btn-success mr-2" (click)="onSave()">
+            <i class="fa fa-check"></i>
+        </button>
+        <!-- <button class="btn btn-info mr-2" (click)="onEdit()">
+            <i class="fa fa-edit"></i>
+        </button> -->
+        <!-- <button class="btn btn-danger mr-2" (click)="onDelete()">
+            <i class="fa fa-trash"></i>
+        </button> -->
+
+        <button class="btn btn-warning " (click)="onBack()">
+            <i class="fa fa-sign-out"></i>
+        </button>
+
+    </div>
+</div>
+<form class="mb-3">
+    <div class="form-row">
+        <div class="form-group col-md-8">
+            <label for="role">Role Name</label>
+            <input type="text" class="form-control" id="role" placeholder="Input role name" name="name" [(ngModel)]="objectDetail.description" readonly>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-8">
+            <label for="description">Description</label>
+            <!-- <input type="password" class="form-control" id="description" placeholder="Input description"> -->
+            <textarea name="" id="" cols="30" rows="5" class="form-control" placeholder="Input description" name="description" [(ngModel)]="objectDetail.description" readonly></textarea>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-1">
+            <label for="role" class="">Status</label>
+        </div>
+        <div class="col-md-4">
+            <app-toggle-switch [model]="objectDetail.status" (modelChange)="onChangeStatus($event)"></app-toggle-switch>
+        </div>
+    </div>
+
+</form>
