@@ -116,7 +116,7 @@ export class UserProfileComponent implements OnInit {
         status: new FormControl(this.objectDetail.status, [Validators.required]),
         role: new FormControl(this.objectDetail.role, [Validators.required]),
         avatar: new FormControl(this.objectDetail.avatar, [Validators.required]),
-        tutor: new FormControl(this.objectDetail.tutor ? this.objectDetail.tutor.email : '', [Validators.required]),
+        tutor: new FormControl(this.objectDetail.tutor ? this.objectDetail.tutor.email : null, [Validators.required]),
 
       }
     );
