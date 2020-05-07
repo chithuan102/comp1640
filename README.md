@@ -1,12 +1,8 @@
 # comp1640
-Source code is available on Github with public link:
-
-https://github.com/chithuan102/comp1640
-
 To download source code from Github, you must:
-•	Create a Github account
-•	Install credential from Github
-•	After that type: git clone https://github.com/chithuan102/comp1640
+1.	Create a Github account
+2.	Install credential from Github
+3.	After that type: git clone https://github.com/chithuan102/comp1640
 
 To run Frontend source you must:
 
