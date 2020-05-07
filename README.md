@@ -4,6 +4,8 @@ To download source code from Github, you must:
 2.	Install credential from Github
 3.	After that type: git clone https://github.com/chithuan102/comp1640
 
+OR: You can download by click button Clone and download to download zip file
+
 To run Frontend source you must:
 
 1.	Install nodejs latest version at page https://nodejs.org/en/
@@ -27,3 +29,4 @@ To run Backend source you must:
 5.	After that type mvn clean install as current project path
 
 6.	Then go to folder target/ has been generated and type: java  -jar project-0.0.1-SNAPSHOT to run.
+
